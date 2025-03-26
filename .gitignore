@@ -172,3 +172,10 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+
+# Local Files
+clipboardHelper
+node_modules
+server
+pokemon.txt
+test.py

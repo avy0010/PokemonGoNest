@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mumbai Pokémon Nests</title>
+    <!-- <link rel="icon" type="image/x-icon" href="favicons/favicon.ico"> -->
+    <link rel="icon" type="image/png" sizes="192x192" href="favicons/android-chrome-192x192.png">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/mainMenu.css">
+    <script type="module" src="/server/firebase.js"></script>
+    <script type="module" src="js/main.js"></script>
+</head>
+
+<body>
+    <h2 id="title">Mumbai Pokémon Nests</h2>
+    <div id="map"></div>
+
+    <!-- Toggle Button -->
+    <button id="toggleTabsBtn" onclick="toggleTabs()">
+        <img src="../public/images/B250x250.png" alt="Menu">
+    </button>
+    <button id="locate-btn" onclick="showCurrentLocation()" class="circle-btn">𖦏</button>
+    <button id="layers-btn" onclick="toggleMapLayer()">◈</button>
+
+
+    <div id="tabsContainer" class="tabs-container">
+        <!-- Tabs Navigation -->
+        <div class="tabs">
+            <!-- <button class="gmaps-btn active" onclick="openTab(event, 'addNestTab')">➕</button> -->
+            <button class="gmaps-btn" onclick="openTab(event, 'searchPlaceTab')">🗺️</button>
+            <button class="gmaps-btn" onclick="openTab(event, 'searchPokemonTab')">🪺</button>
+            <button class="gmaps-btn" onclick="openTab(event, 'markerTab')">📍</button>
+        </div>
+
+        <!-- Tabs Content -->
+        <div class="tab-content">
+            <!-- <div id="addNestTab" class="tab-panel active">
+                <div class="input-group">
+                    <input type="text" id="pokemonName" placeholder="Add Pokémon Nest here" autocomplete="off">
+                    <button onclick="addNest()">➕</button>
+                </div>
+            </div> -->
+
+            <div id="searchPlaceTab" class="tab-panel">
+                <div class="input-group">
+                    <input type="text" id="searchPlace" placeholder="🔎︎ Place/Coordinates">
+                    <button class="gmaps-btn" onclick="searchPlaces()">🔍</button>
+                </div>
+                <ul id="placeResults"></ul>
+            </div>
+
+            <div id="searchPokemonTab" class="tab-panel">
+                <div class="input-group">
+                    <input type="text" id="searchPokemon" placeholder="🔎︎ Pokémon">
+                    <ul id="searchSuggestions" class="suggestions-list"></ul>
+                    <button class="gmaps-btn" onclick="searchNests()">🔍</button>
+                </div>
+                <ul id="searchResults"></ul>
+            </div>
+
+            <div id="markerTab" class="tab-panel">
+                <button class="gmaps-btn" id="marker-btn" onclick="placeMarker()">&nbsp;+ Add Nest by Marker&nbsp; </button>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

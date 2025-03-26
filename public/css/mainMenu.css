@@ -1,0 +1,74 @@
+/* ######### */
+#toggleTabsBtn {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    z-index: 1000;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+#toggleTabsBtn img{
+    width: 40px;
+    height: 40px;
+}
+#toggleTabsBtn img:hover {
+    /* width: 42px;
+    height: 42px; */
+    scale: 1.05;
+    transition: all 0.3s ease-in-out;
+}
+
+#toggleTabsBtn img:active {
+    transform: scale(0.8);
+}
+
+#tabButtons {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* z-index: 1000; */
+}
+
+.tabs-container {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    z-index: 500;
+    transition: max-height 0.8s ease-in-out;
+}
+
+
+.tabs {
+    display: flex;
+    flex-direction: row; /* Change to horizontal layout */
+    background: #2c2c2c;
+    padding: 5px;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+.tab-content {
+    background: #fff;
+    width: 250px;
+    padding: 15px;
+    border-radius: 0 0 15px 15px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.tab-panel {
+    display: none;
+}
+
+.tab-panel.active {
+    display: block;
+}
+
+.hidden {
+    display: none;
+}

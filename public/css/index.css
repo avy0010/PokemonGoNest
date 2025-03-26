@@ -1,0 +1,474 @@
+/* 🔹 GLOBAL STYLES */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+* {
+    font-family: 'Nunito', sans-serif !important;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    /* Prevents unwanted scrolling */
+    display: flex;
+    /* Ensures everything takes full width & height */
+    flex-direction: column;
+    /* Stack elements vertically */
+}
+
+/* 🔹 MAP STYLING */
+#map {
+    flex: 1;
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* 🔹 PAGE TITLE */
+#title {
+    position: absolute;
+    top: 15px;
+    left: 25px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: 2px 2px 4px black;
+    /* Only text shadow */
+    z-index: 800;
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    pointer-events: none;
+}
+
+
+/* 🔹 CONTROL PANEL (BOTTOM RIGHT) */
+#controls {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1001;
+}
+
+/* 🔹 COMMON INPUT & BUTTON STYLES */
+#controls input {
+    width: 170px;
+    background-color: red;
+    padding: 6px;
+    border: 1px solid #e41717;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+/* 🔹 LAYOUT ARRANGEMENT */
+
+
+
+
+/* 🔹 SEARCH RESULTS LIST */
+#searchResults,
+#placeResults {
+    position: absolute;
+    width: calc(100% - 20px);
+    /* Adjust width */
+    max-height: 150px;
+    overflow-y: auto;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: block;
+    /* Ensure it's visible */
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* 🔹 ENSURE SEARCH DROPDOWNS ARE POSITIONED CORRECTLY */
+#placeResults {
+    top: 40px;
+    /* Space from input */
+    left: 0;
+}
+
+#searchResults {
+    top: 80px;
+    /* Adjust position */
+    left: 0;
+}
+
+
+#searchResults li,
+#placeResults li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+#searchResults li:hover,
+#placeResults li:hover {
+    background: #f0f0f0;
+}
+
+/* 🔹 POKÉMON SUGGESTIONS DROPDOWN */
+.suggestions-list {
+    position: absolute;
+    background: white;
+    border: 1px solid #ccc;
+    border-bottom-left-radius: 10px; /* Rounded bottom corners */
+    border-bottom-right-radius: 10px; /* Rounded bottom corners */
+    list-style: none;
+    padding: 5px;
+    width: 100px;
+    margin: 0;
+    max-height: 150px;
+    overflow-y: auto;
+    display: none; /* Initially hidden */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+}
+
+.suggestions-list li {
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.suggestions-list li:hover {
+    background: #f1f1f1;
+}
+
+
+
+
+/* 🔹 HEADER STYLING */
+#header {
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 10px;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+
+
+
+/* 🔹 CURRENT LOCATION BUTTON */
+#locate-btn {
+    position: fixed;
+    bottom: 80px;
+    /* Distance from bottom */
+    left: 14px;
+    /* Distance from left */
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #414141;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(56, 56, 56, 0.1);
+    /* Slightly visible */
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+    /* ✅ Ensure it's above other elements */
+}
+
+#layers-btn {
+    position: fixed;
+    bottom: 115px;
+    /* Distance from bottom */
+    left: 14px;
+    /* Distance from left */
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    color: #414141;
+    font-size: 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px rgba(56, 56, 56, 0.1);
+    /* Slightly visible */
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1000;
+    /* ✅ Ensure it's above other elements */
+}
+
+#layers-btn:hover, 
+#locate-btn:hover {
+    /* transition: background-color 0.3s ease-in-out, font-weight 0.3s ease-in-out; */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease-in-out;
+    font-weight: 600;
+    background-color: #f0f0f0;
+
+}
+
+#layers-btn:active,
+#locate-btn:active,
+.copy-btn:active,
+.gmaps-btn:active {
+    transform: scale(0.95);
+}
+
+
+/* 🔹 ZOOM IN (+) BUTTON */
+.leaflet-touch .leaflet-bar a:first-child {
+    opacity: 0.7;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    position: fixed !important;
+    bottom: 44px;
+    left: 15px;
+    box-shadow: 2px 0px 5px rgba(56, 56, 56, 0.3);
+    /* Right shadow */
+}
+
+/* 🔹 ZOOM OUT (-) BUTTON */
+.leaflet-touch .leaflet-bar a:last-child {
+    opacity: 0.7;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    position: fixed !important;
+    bottom: 15px;
+    left: 15px;
+    box-shadow: 2px 2px 5px rgba(56, 56, 56, 0.3);
+    /* Bottom-right */
+}
+
+
+/* 🔹 ZOOM BUTTON HOVER EFFECT */
+.leaflet-touch .leaflet-bar a:first-child:hover,
+.leaflet-touch .leaflet-bar a:last-child:hover {
+    transition: opacity 0.3s ease-in-out;
+    opacity: 1;
+    font-size: 24px;
+}
+
+/* 🔹 HIDE DEFAULT LEAFLET ATTRIBUTION */
+.leaflet-control-attribution {
+    /* display: none !important; */
+    font-size: 10px;
+}
+
+/* Default cursor (arrow) */
+.leaflet-grab, .leaflet-dragging .leaflet-grab {
+    cursor: default !important;  /* Arrow cursor */
+}
+
+/* Dragging cursor (Google Maps style) */
+.leaflet-dragging .leaflet-container {
+    cursor: grabbing !important;
+}
+
+/* When hovering over markers */
+.leaflet-marker-icon {
+    cursor: pointer;
+}
+
+/* Ensures marker is ABOVE the  (pokemon icons) label */
+.leaflet-marker-icon {
+    z-index: 1000 !important; 
+}
+
+/* 🔹 POKÉMON LABEL STYLING */
+.pokemon-label .label {
+    background: rgba(255, 255, 255, 0.6);
+    padding: 3px 4px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #414141;
+    border: 1px solid #999;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    transform: translateX(-145%) translateY(-115%);
+}
+
+/* 🔹 MAP MARKER CURSOR '+' symbol */
+.map-marker-cursor {
+    cursor: crosshair !important;
+}
+
+/* 🔹 PAGE HEADING */
+h2 {
+    font-size: 28px;
+    text-align: center;
+    color: white;
+    text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+
+
+/*  */
+.input-group input, .leaflet-popup-content input {
+    outline: none;
+    border: none;
+    background: rgba(239, 239, 239, 0);
+    /* min-width: min-content/2; */
+    /* font-size: 14px; */
+    border-bottom: 1px solid rgba(34, 34, 34, 0.3);  
+    transition: border-color 0.3s ease-in-out;
+}
+
+/* When input is focused */
+/* .leaflet-popup-content input:focus {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.6);
+} */
+
+
+.leaflet-popup-content-wrapper{
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    background: rgba(239, 239, 239, 0.5);
+}
+
+.leaflet-popup-tip {
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    background: rgba(239, 239, 239, 0.3);
+}
+
+
+/* TAP ON MARKER POPUP */
+.popup-container {
+    font-family: Arial, sans-serif;
+    max-width: auto;
+    text-align: left;
+}
+
+.popup-title {
+    padding-right: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #424242;
+    margin-bottom: 5px;
+}
+
+.popup-address {
+    font-size: 12px;
+    color: #585858;
+    margin: 0;
+}
+
+.popup-actions {
+    display: flex;
+    /* justify-content: left;
+    align-items: center; */
+    margin-top: 5px;
+    gap: 0px;
+}
+
+/* Last updated css  */
+.popup-container small{
+    color: #585858;
+}
+
+
+/* Pokemon popup  */
+.copy-btn, .gmaps-btn{
+    /* align-items: top; */
+    font-size: 14px;
+    font-weight: bold;
+    color: #585858;
+    min-width: max-content;
+    outline: 1px solid rgba(177, 177, 177, 0.5);
+    background-color: rgba(237, 237, 237, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 5px;
+    margin: 3px;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+}
+
+.copy-btn{
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.copy-btn:hover, .gmaps-btn:hover {
+    background-color: rgba(253, 253, 253, 0.6);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Toast Message */
+.toast-message {
+    position: fixed;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(11, 11, 11, 0.5);
+    color: rgb(211, 211, 211);
+    padding: 10px 15px;
+    border-radius: 8px;
+    font-size: 14px;
+    opacity: 1;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 10000; /* Ensure it's above other elements */
+}
+
+.pokemon-name-label:hover {
+    position: absolute;
+    text-align: center;
+    min-width: max-content; /* Ensures text box expands */
+    font-size: 10px;
+    font-weight: bold;
+    color: rgba(46, 46, 46, 0.7);
+    background: rgba(255, 255, 255, 0.3);
+    /*  TOP-RIGHT BOTTOM-RIGHT BOTTOM-LEFT TOP-LEFT */
+    /* padding: 5px 10px;  */
+    padding-left: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 12px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 4px;
+    border-top-right-radius: 18px ;
+    /* clip-path: polygon(0 0, 80% 0, 100% 50%, 80% 100%, 0 100%); */
+    /* filter: drop-shadow(0px 2px 4px rgba(0, 0, 0, 0.2));  */
+    border: 1px solid rgb(98, 98, 98, 0.2);
+    /* box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); */
+    white-space: nowrap; /* Prevents text from wrapping */
+    z-index: 999; /* Ensures label is BELOW the marker */
+ 
+    
+    backdrop-filter: blur(5px); /* ✅ Adds a blur effect */
+    -webkit-backdrop-filter: blur(5px); /* ✅ For Safari support */
+}
+
+.pokemon-name-label{
+    display: none;
+}
+
+
