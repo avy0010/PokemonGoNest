@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/mainMenu.css">
+    <link rel="stylesheet" href="css/menu.css">
     <script type="module" src="/server/firebase.js"></script>
     <script type="module" src="js/main.js"></script>
 </head>
@@ -20,12 +20,14 @@
     <h2 id="title">Mumbai Pokémon Nests</h2>
     <div id="map"></div>
 
+    <button id="locate-btn" onclick="showCurrentLocation()" class="circle-btn">𖦏</button>
+    <button id="layers-btn" onclick="toggleMapLayer()">◈</button>
+
     <!-- Toggle Button -->
     <button id="toggleTabsBtn" onclick="toggleTabs()">
         <img src="../public/images/B250x250.png" alt="Menu">
     </button>
-    <button id="locate-btn" onclick="showCurrentLocation()" class="circle-btn">𖦏</button>
-    <button id="layers-btn" onclick="toggleMapLayer()">◈</button>
+
 
 
     <div id="tabsContainer" class="tabs-container">
@@ -39,13 +41,6 @@
 
         <!-- Tabs Content -->
         <div class="tab-content">
-            <!-- <div id="addNestTab" class="tab-panel active">
-                <div class="input-group">
-                    <input type="text" id="pokemonName" placeholder="Add Pokémon Nest here" autocomplete="off">
-                    <button onclick="addNest()">➕</button>
-                </div>
-            </div> -->
-
             <div id="searchPlaceTab" class="tab-panel">
                 <div class="input-group">
                     <input type="text" id="searchPlace" placeholder="🔎︎ Place/Coordinates">

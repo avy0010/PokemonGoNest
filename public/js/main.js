@@ -206,7 +206,7 @@ map.on('click', async function (event) {
                         <p class="popup-address">${address}</p>
                         <div class="popup-actions">
                             <button class="copy-btn" onclick="copyToClipboard('${lat.toFixed(5)}, ${lng.toFixed(5)}')">
-                                ${lat.toFixed(5)}, ${lng.toFixed(5)}
+                                &nbsp;${lat.toFixed(5)}, ${lng.toFixed(5)}&nbsp;
                             </button>
                             <button class="gmaps-btn" onclick="openGoogleMaps(${lat}, ${lng})" title="Open in Google Maps">🗺️</button>
                             <button class="gmaps-btn" onclick="showNestPopup(${lat}, ${lng})" title="Add Pokémon Nest">➕</button>
@@ -657,94 +657,6 @@ window.updatePopup = function (id, nest) {
     }, 4000);
 };
 
-
-
-// ✅ Attach function to `window` to make it accessible in HTML
-// window.addNest = async function () {
-//     if (!navigator.geolocation) {
-//         alert("Geolocation not supported.");
-//         return;
-//     }
-
-//     let pokemonInput = document.getElementById("pokemonName").value.trim();
-
-//     // ✅ Load valid Pokémon names
-//     let validPokemonList = await loadPokemonList();
-    
-//     // ✅ Check if entered Pokémon is in the list
-//     if (!validPokemonList.includes(pokemonInput)) {
-//         alert("Invalid Pokémon name! Please select from the suggestions.");
-//         return;
-//     }
-
-//     // 🔹 Get user location
-//     navigator.geolocation.getCurrentPosition(async (position) => {
-//         let lat = position.coords.latitude;
-//         let lng = position.coords.longitude;
-//         let docId = `${lat}_${lng}`.replace(/\./g, "_");
-//         let docRef = doc(db, "pokemon_nests", docId);
-
-//         try {
-//             // ✅ Add or update the nest in Firestore
-//             await setDoc(docRef, {
-//                 location: new GeoPoint(lat, lng),
-//                 addedAt: serverTimestamp(),
-//                 pokemon: pokemonInput
-//             }, { merge: true });
-
-//             console.log("✅ Nest added:", docId);
-
-//             // ✅ Ensure Firestore updates timestamp before adding marker
-//             setTimeout(async () => {
-//                 let docSnap = await getDoc(docRef);
-//                 if (docSnap.exists()) {
-//                     let nest = docSnap.data();
-//                     addMarker(lat, lng, nest.pokemon, docId, nest.addedAt?.seconds || null);
-//                 }
-//             }, 100);
-
-//         } catch (error) {
-//             console.error("❌ Error adding/updating nest:", error);
-//         }
-//     }, () => alert("Location access denied."));
-// };
-
-
-
-// ✅ Attach function to `window` to make it accessible in HTML
-// window.deleteNest = async function (id) {
-//     let docSnap = await getDoc(doc(db, "pokemon_nests", id));
-//     if (!docSnap.exists()) {
-//         window.showToast("❌ Nest not found.");
-//         return;
-//     }
-
-//     let nest = docSnap.data();
-//     let correctPokemonName = nest.pokemon;
-
-//     // 🛠️ Show the custom prompt
-//     let userInput = await showCustomPrompt(`Type the name of the Pokémon (${correctPokemonName}) to confirm deletion:`);
-
-//     // If the user cancels, return
-//     if (!userInput) return;
-
-//     // ✅ Validate input
-//     if (userInput.trim().toLowerCase() !== correctPokemonName.toLowerCase()) {
-//         window.showToast("❌ Incorrect Pokémon name. Deletion cancelled.");
-//         return;
-//     }
-
-//     try {
-//         await deleteDoc(doc(db, "pokemon_nests", id));
-//         console.log("✅ Nest deleted:", id);
-//         removeMarker(id);
-//         window.showToast(`✅ ${correctPokemonName} nest deleted successfully!`);
-//     } catch (error) {
-//         console.error("❌ Error deleting nest:", error);
-//         window.showToast("❌ Error deleting nest. Try again!");
-//     }
-// };
-
 window.deleteNest = async function (id) {
     let docSnap = await getDoc(doc(db, "pokemon_nests", id));
     if (!docSnap.exists()) {
@@ -871,64 +783,6 @@ document.addEventListener("click", function (event) {
         // resultList.style.display = "none";
     }
 });
-
-// document.addEventListener("DOMContentLoaded", async () => {
-//     const pokemonInput = document.getElementById("pokemonName");
-//     const suggestionsList = document.createElement("ul");
-//     suggestionsList.id = "suggestions";
-//     document.body.appendChild(suggestionsList);
-
-//     let pokemonList = await loadPokemonList(); // ✅ Load Pokémon names
-
-//     pokemonInput.addEventListener("input", () => {
-//         let search = pokemonInput.value.toLowerCase().trim();
-//         suggestionsList.innerHTML = "";
-
-//         if (!search) {
-//             suggestionsList.style.display = "none";
-//             return;
-//         }
-
-//         // ✅ Filter Pokémon names based on input
-//         let filtered = pokemonList.filter(pokemon =>
-//             pokemon.toLowerCase().includes(search)
-//         );
-
-//         if (filtered.length === 0) {
-//             suggestionsList.style.display = "none";
-//             return;
-//         }
-
-//         // ✅ Show up to 10 suggestions
-//         filtered.slice(0, 10).forEach(pokemon => {
-//             let li = document.createElement("li");
-//             li.textContent = pokemon;
-//             li.addEventListener("click", () => {
-//                 pokemonInput.value = pokemon;
-//                 suggestionsList.style.display = "none";
-//             });
-//             suggestionsList.appendChild(li);
-//         });
-
-//         // ✅ Position dropdown below the input
-//         let rect = pokemonInput.getBoundingClientRect();
-//         suggestionsList.style.left = `${rect.left + window.scrollX}px`;
-//         suggestionsList.style.top = `${rect.bottom + window.scrollY}px`;
-//         suggestionsList.style.width = `${rect.width}px`;
-//         suggestionsList.style.display = "block";
-//     });
-
-//     // ✅ Hide suggestions when clicking outside
-//     document.addEventListener("click", (event) => {
-//         if (!pokemonInput.contains(event.target) && !suggestionsList.contains(event.target)) {
-//             suggestionsList.style.display = "none";
-//         }
-//     });
-// });
-
-
-
-
 
 
 // Search by Pokémon function
